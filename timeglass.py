@@ -7,7 +7,7 @@ import os
 
 # pyinstaller --onefile -w --add-data "Icons/:Icons" --icon="Icons/timeglass.png" --clean timeglass.spec
 
-rumps.debug_mode(True)
+#rumps.debug_mode(True)
 
 class TimerApp(rumps.App):
     def __init__(self, initial_seconds):
