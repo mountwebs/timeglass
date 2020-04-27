@@ -34,7 +34,7 @@ exe = EXE(pyz,
 
 app = BUNDLE(exe,
              name='timeglass.app',
-             icon='Icons/timeglass.png',
+             icon='Icons/timeglass.icns',
              bundle_identifier=None,
              info_plist={
         'LSUIElement': 'True'
