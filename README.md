@@ -1,7 +1,7 @@
 # Timeglass
 Timeglass is a simple, unobtrusive menu bar timer for macOS.
 
-![Menu bar](Images/menu_bar.jpg)
+![](Images/menu_bar.png)
 
 Download it [here](https://github.com/mountwebs/timeglass/releases/tag/v1.0). 
 
