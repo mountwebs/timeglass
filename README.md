@@ -5,4 +5,6 @@ Timeglass is a simple, unobtrusive menu bar timer for macOS.
 
 Download it from [releases](https://github.com/mountwebs/timeglass/releases/tag/v1.0). 
 
-Or build it yourself with [pyinstaller](https://github.com/pyinstaller/pyinstaller): "pyinstaller --onefile -w --add-data "Icons/:Icons" --icon="Icons/timeglass.png" --clean timeglass.spec".
+Or build it yourself: "pyinstaller --onefile -w --add-data "Icons/:Icons" --icon="Icons/timeglass.png" --clean timeglass.spec".
+
+Timeglass is made with [rumps](https://github.com/jaredks/rumps) and the app is built with [pyinstaller](https://github.com/pyinstaller/pyinstaller).
