@@ -13,7 +13,6 @@ class Timer():
 
     def get_remaining_string(self):
         conversion = timedelta(seconds=self.remaining)
-        #converted_time = str(conversion)
         return str(conversion) 
 
     def start(self):
@@ -31,12 +30,10 @@ class Timer():
             now = time.time()
             if now - self.last_tick >= 1:
                 seconds = int(now - self.last_tick)
-                #print("test")
                 self.elapsed += seconds
                 self.remaining -= seconds
                 self.last_tick = now
                 return True
-            #print(self.remaining)
 
         if self.remaining <= 0 and self.active:
             self.remaining = 0
