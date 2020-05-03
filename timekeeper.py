@@ -10,9 +10,11 @@ class Timer():
         self.done = False
         self.active = False
         self.last_tick = time.time()
+        self.start_time = None
+        self.elapsed_at_pause = 0
 
     def get_remaining_string(self):
-        conversion = timedelta(seconds=self.remaining)
+        conversion = timedelta(seconds=int(self.remaining))
         return str(conversion) 
 
     def start(self):
@@ -20,25 +22,24 @@ class Timer():
         self.pause = False
         self.done = False
         self.last_tick = time.time()
+        self.start_time = time.time()
 
-    def pause(self):
+    def pause_timer(self):
         self.active = False
         self.pause = True
+        self.elapsed_at_pause = self.elapsed
 
     def tick(self):
-        if self.active and not self.done:
-            now = time.time()
-            if now - self.last_tick >= 1:
-                seconds = int(now - self.last_tick)
-                self.elapsed += seconds
-                self.remaining -= seconds
-                self.last_tick = now
-                return True
-
         if self.remaining <= 0 and self.active:
             self.remaining = 0
             self.done = True
             self.active = False
+        elif self.active and not self.done:
+            now = time.time()
+            self.elapsed = now - self.start_time + self.elapsed_at_pause
+            self.remaining = self.initial - self.elapsed
+            print(self)
+            return True
         return False
 
     def set_time(self, seconds):
@@ -50,4 +51,7 @@ class Timer():
         self.active = False
         self.elapsed = 0
         self.remaining = self.initial
+
+    def __str__(self):
+        return(f"remaining: {self.remaining}, elapsed: {self.elapsed}")
 

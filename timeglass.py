@@ -7,7 +7,7 @@ import os
 
 # pyinstaller --onefile -w --add-data "Icons/:Icons" --icon="Icons/timeglass.png" --clean timeglass.spec
 
-#rumps.debug_mode(True)
+# rumps.debug_mode(True)
 
 class TimerApp(rumps.App):
     def __init__(self, initial_seconds):
@@ -60,8 +60,9 @@ class TimerApp(rumps.App):
     @rumps.clicked("Start")
     def pause(self, sender):
         if sender.title == "Pause":
-            self.timekeeper.pause = True
-            self.timekeeper.active = False
+            self.timekeeper.pause_timer()
+            # self.timekeeper.pause = True
+            # self.timekeeper.active = False
             self.rumps_timer.stop()
             sender.title = "Start"
         elif sender.title == "Start":
