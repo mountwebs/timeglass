@@ -38,7 +38,6 @@ class Timer():
             now = time.time()
             self.elapsed = now - self.start_time + self.elapsed_at_pause
             self.remaining = self.initial - self.elapsed
-            print(self)
             return True
         return False
 

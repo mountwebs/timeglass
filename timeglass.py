@@ -112,6 +112,7 @@ class TimerApp(rumps.App):
 
     @rumps.clicked("Set time")
     def set_time(self, _):
+        self.timekeeper.pause_timer()
         response = rumps.Window("Enter time: (hours:minutes:seconds)").run()
         if response.clicked:
             if not self.validate_input(response.text):
