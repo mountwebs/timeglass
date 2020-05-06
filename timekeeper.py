@@ -50,6 +50,7 @@ class Timer():
         self.active = False
         self.elapsed = 0
         self.remaining = self.initial
+        self.elapsed_at_pause = 0
 
     def __str__(self):
         return(f"remaining: {self.remaining}, elapsed: {self.elapsed}")
