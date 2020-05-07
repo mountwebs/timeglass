@@ -7,7 +7,7 @@ import os
 
 # pyinstaller --onefile -w --add-data "Icons/:Icons" --icon="Icons/timeglass.png" --clean timeglass.spec
 
-# rumps.debug_mode(True)
+rumps.debug_mode(True)
 
 class TimerApp(rumps.App):
     def __init__(self, initial_seconds):
@@ -23,9 +23,9 @@ class TimerApp(rumps.App):
         self.rumps_timer = rumps.Timer(self.tick,0.5)
         self.rumps_timer.callback(self.tick)
         self.invert_counter = 0
+        self.notified = False
 
     def change_icon(self):
-        #self.im.draw_icon(frame)
         print("frame:", self.im.icon_counter)
         self.icon = self.im.get_icon_path()
 
@@ -41,13 +41,13 @@ class TimerApp(rumps.App):
                 self.im.icon_counter = int(self.timekeeper.elapsed/self.im.icon_interval) + 1 #1-89
                 self.change_icon()
                 self.next_icon_change += self.im.icon_interval
-                print(self.timekeeper.elapsed)
-                print(self.timekeeper.elapsed/self.im.icon_interval)
-                print(int(self.timekeeper.elapsed/self.im.icon_interval))
 
         if self.timekeeper.done:
             self.im.active = False
             self.change_icon()
+            if not self.notified:
+            	self.notify()
+            	self.notified = True
             if self.notDone:
                 self.icon = self.im.invert()
                 self.invert_counter += 1
@@ -55,15 +55,20 @@ class TimerApp(rumps.App):
                     self.notDone = False
                     self.rumps_timer.stop()
                     self.reset()
-                    #self.pause()
-                
+
+    def notify(self):
+        title = "Time is up"
+        text = ""
+        sound = "Glass"
+        try:
+            os.system("""osascript -e 'display notification "{}" with title "{}" sound name "{}"'""".format(text, title, sound))
+        except:
+            print("Could not send notification")
 
     @rumps.clicked("Start")
     def pause(self, sender):
         if sender.title == "Pause":
             self.timekeeper.pause_timer()
-            # self.timekeeper.pause = True
-            # self.timekeeper.active = False
             self.rumps_timer.stop()
             sender.title = "Start"
         elif sender.title == "Start":
@@ -87,6 +92,7 @@ class TimerApp(rumps.App):
         self.change_remaining()
         self.next_icon_change = self.im.icon_interval
         self.menu["Start"].title = "Start"
+        self.notified = False
 
     def string_to_sec(self, text):
         nums = text.split(":")
@@ -98,7 +104,6 @@ class TimerApp(rumps.App):
             else:
                 seconds += (60**i) * int(n)
                 print((i * 60) * int(n))
-                #print(f"{i} {n} {seconds}")
         return seconds
 
     def validate_input(self, text):
