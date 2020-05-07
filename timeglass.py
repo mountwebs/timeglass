@@ -7,7 +7,7 @@ import os
 
 # pyinstaller --onefile -w --add-data "Icons/:Icons" --icon="Icons/timeglass.png" --clean timeglass.spec
 
-rumps.debug_mode(True)
+# rumps.debug_mode(True)
 
 class TimerApp(rumps.App):
     def __init__(self, initial_seconds):
@@ -24,6 +24,7 @@ class TimerApp(rumps.App):
         self.rumps_timer.callback(self.tick)
         self.invert_counter = 0
         self.notified = False
+        self.sound = True
 
     def change_icon(self):
         print("frame:", self.im.icon_counter)
@@ -57,11 +58,14 @@ class TimerApp(rumps.App):
                     self.reset()
 
     def notify(self):
-        title = "Time is up"
+        title = "Time is up!"
         text = ""
         sound = "Glass"
         try:
-            os.system("""osascript -e 'display notification "{}" with title "{}" sound name "{}"'""".format(text, title, sound))
+            if self.sound:
+                os.system("""osascript -e 'display notification "{}" with title "{}" sound name "{}"'""".format(text, title, sound))
+            else:
+                os.system("""osascript -e 'display notification "{}" with title "{}"'""".format(text, title, sound))
         except:
             print("Could not send notification")
 
