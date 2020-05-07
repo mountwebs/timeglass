@@ -14,6 +14,7 @@ class TimerApp(rumps.App):
         super(TimerApp, self).__init__("")
         self.mode = "hourglass"
         self.timekeeper = timekeeper.Timer(initial_seconds)
+        self.template = True
         self.im = icon_manager.Icon_manager(initial_seconds)
         self.change_icon()        
         self.remaining_sec = rumps.MenuItem(self.timekeeper.get_remaining_string())
