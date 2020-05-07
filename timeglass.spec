@@ -4,7 +4,6 @@ block_cipher = None
 
 
 a = Analysis(['timeglass.py'],
-             pathex=['/Users/Gekko/Tinkering/Python/timeglass'],
              binaries=[],
              datas=[('Icons/', 'Icons')],
              hiddenimports=[],
