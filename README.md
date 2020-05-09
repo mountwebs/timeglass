@@ -20,6 +20,7 @@ You can also build it yourself if you have pyinstaller installed. ("pyinstaller 
 - Adding a simple preference pane.
 - Add ability to remove alert and/or sound.
 - Add timeglass icon in alert.
+- Simplify and prettify the animation.
 
 Possible improvements:
 - Add some time presets (and maybe let the user choose presets from preferences).
