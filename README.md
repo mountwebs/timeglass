@@ -24,7 +24,7 @@ You can also build it yourself if you have pyinstaller installed. ("pyinstaller 
 
 Possible improvements:
 - Add some time presets (and maybe let the user choose presets from preferences).
-- Add hotkeys (see issue #2).
+- Add global hotkeys (as a possibility)
 - Add pomodoro support (with auto breaks etc.).
 
 ## Contributions
