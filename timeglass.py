@@ -16,7 +16,7 @@ class TimerApp(rumps.App):
         self.timekeeper = timekeeper.Timer(initial_seconds)
         self.template = True
         self.im = icon_manager.Icon_manager(initial_seconds)
-        self.change_icon()        
+        self.change_icon()
         self.remaining_sec = rumps.MenuItem(self.timekeeper.get_remaining_string())
         self.menu = [self.remaining_sec]
         self.next_icon_change = self.im.icon_interval
@@ -69,7 +69,7 @@ class TimerApp(rumps.App):
         except:
             print("Could not send notification")
 
-    @rumps.clicked("Start")
+    @rumps.clicked("Start", key="s")
     def pause(self, sender):
         if sender.title == "Pause":
             self.timekeeper.pause_timer()
@@ -82,7 +82,7 @@ class TimerApp(rumps.App):
             self.rumps_timer.start()
             sender.title = "Pause"
 
-    @rumps.clicked("Reset")
+    @rumps.clicked("Reset", key="r")
     def reset_button(self, sender):
         self.reset()
         self.menu["Start"].title = "Start"
@@ -120,7 +120,7 @@ class TimerApp(rumps.App):
                 return False
         return True
 
-    @rumps.clicked("Set time")
+    @rumps.clicked("Set time", key="t")
     def set_time(self, _):
         self.timekeeper.pause_timer()
         response = rumps.Window("Enter time: (hours:minutes:seconds)").run()
@@ -133,7 +133,7 @@ class TimerApp(rumps.App):
                 seconds = self.string_to_sec(response.text)
                 print(seconds)
                 skip = False
-            
+
             if not skip:
                 self.rumps_timer.stop()
                 self.timekeeper.set_time(seconds)
@@ -148,4 +148,3 @@ class TimerApp(rumps.App):
 if __name__ == "__main__":
     default_secounds = 60 * 60
     TimerApp(default_secounds).run()
-
