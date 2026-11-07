@@ -116,7 +116,7 @@ class TimerApp(rumps.App):
         for s in texts:
             try:
                 int(s)
-            except:
+            except ValueError:
                 return False
         return True
 
